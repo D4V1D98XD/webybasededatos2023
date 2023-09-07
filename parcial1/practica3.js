@@ -19,7 +19,13 @@ $(document).ready(function(){
             }
         }
         if(carta1 != "" && carta2 != ""){
-            if(carta1.attr('data-id') == carta)
+            if(carta1.attr('data-id') == carta){
+                par = true;
+                total_pares++;
+                $("#total_pares").html(total_pares);
+                carta1 = "";
+                carta2 = "";
+            }
         }
 
     });
