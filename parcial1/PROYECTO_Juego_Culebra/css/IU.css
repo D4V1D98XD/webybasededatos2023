@@ -1,0 +1,36 @@
+body,html {
+
+    background-color: #f0f0f0;
+    font-family: 'Deadwax-DEMO', 'batmfa_';
+}
+
+.name {
+    padding: 20px;
+    text-shadow: 1px 1px 1px rgb(226, 195, 21);
+    font-family: 'batmfa_', Courier, monospace;
+}
+
+.boton1{
+    padding: 20px;
+    margin-left: 40px;
+    margin-right: 40px;
+    border-radius: 5px;
+    background-color: #dddbdb;
+    box-shadow: 1px 1px 1em gold;
+    font-family: 'batmfa_', Courier, monospace;
+}
+
+.boton1:hover{
+    padding: 20px;
+    margin-left: 40px;
+    border-radius: 5px;
+    background-color: #afafaf;
+    box-shadow: 1px 1px 1em rgb(204, 173, 0);
+    font-family: 'batmfa_', Courier, monospace;
+}
+
+.container {
+    display: flex;
+    align-items: center; 
+    padding: 20px; 
+}

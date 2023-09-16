@@ -1,31 +1,28 @@
 @import "./fonts.css";
+@import "./IU.css";
 
-body,html {
-    display: flex;
-    height: 100vh;
-    margin: 0;
-    background-color: #f0f0f0;
-    font-family: 'Deadwax-DEMO', 'batmfa_';
-}
 
-.name {
-    padding: 20px;
-    font-family: 'batmfa_', Courier, monospace;
-
-}
-
+/* Añadir estilos para centrar el game-container */
 .game-container {
-    width: 900px;
-    height: 400px;
-    border: 1px solid #000;
-    position: absolute;
+    width: 500px;
+    height: 300px;
+    border: 1px solid #000000;
+    margin: 0 auto;
+    position: relative; /* Añadir posición relativa para que la serpiente sea absoluta con respecto a este */
 }
 
 .snake {
     width: 20px;
     height: 20px;
-    background-color: #0074D9;
+    background-color: #39dd19;
     position: absolute;
+    /* Centro la serpiente verticalmente restando la mitad de su altura al contenedor */
+    top: 50%;
+    margin-top: -10px; /* La mitad de la altura de la serpiente */
+    /* Centro la serpiente horizontalmente restando la mitad de su ancho al contenedor */
+    left: 50%;
+    margin-left: -10px; /* La mitad del ancho de la serpiente */
+    display: none;
 }
 
 .food {
