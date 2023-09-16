@@ -1,0 +1,37 @@
+@import "./fonts.css";
+
+body,html {
+    display: flex;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+    font-family: 'Deadwax-DEMO', 'batmfa_';
+}
+
+.name {
+    padding: 20px;
+    font-family: 'batmfa_', Courier, monospace;
+
+}
+
+.game-container {
+    width: 900px;
+    height: 400px;
+    border: 1px solid #000;
+    position: absolute;
+}
+
+.snake {
+    width: 20px;
+    height: 20px;
+    background-color: #0074D9;
+    position: absolute;
+}
+
+.food {
+    width: 20px;
+    height: 20px;
+    background-color: #FF4136;
+    position: absolute;
+}
+
