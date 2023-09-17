@@ -35,17 +35,21 @@ $(document).ready(function () {
     }
 
     function mostrarComidaAleatoria() {
-        comidaX = Math.floor(Math.random() * 25) * 20; // Posición X aleatoria en múltiplos de 20
-        comidaY = Math.floor(Math.random() * 15) * 20; // Posición Y aleatoria en múltiplos de 20
-
-        $(".food").css({ left: comidaX + "px", top: comidaY + "px" });
-
-        // Agregar la comida al DOM
-        $(".food").css("display", "block");
-    }
-
+        var maxX = 480; // Ancho del área del juego
+        var maxY = 280; // Altura del área del juego
+        comidaX = Math.floor(Math.random() * maxX / 20) * 20; // Posición X aleatoria en múltiplos de 20
+        comidaY = Math.floor(Math.random() * maxY / 20) * 20; // Posición Y aleatoria en múltiplos de 20
     
-    // Comprobar colisión entre la cabeza de la serpiente y la comida
+        // Crea un nuevo elemento de comida y establece su posición
+        var nuevaComida = $("<div class='food'></div>");
+        nuevaComida.css({ left: comidaX + "px", top: comidaY + "px" });
+    
+        // Agrega la nueva comida al DOM
+        $(".game-container").append(nuevaComida);
+    
+        // Muestra la nueva comida
+        nuevaComida.css("display", "block");
+    }
 
 
     // Función para mover la serpiente
@@ -65,15 +69,24 @@ $(document).ready(function () {
         $(".snake").css({ left: posX + "px", top: posY + "px" });
 
         // Comprobar colisión con la comida
-        
+        verificarColision();
     }
 
+    // Comprobar colisión entre la cabeza de la serpiente y la comida
     function verificarColision() {
-        if (comidaX === posX && comidaY === posY) {
+        console.log("verificacion si funciona");
+        console.log("posicion serpiente", posX);
+        console.log("posicion comida", comidaX);
+        if (comidaX + 10 == posX && comidaY + 10 == posY) {
             console.log("Colisión detectada");
+            $(".food").remove();
             $("#Puntos").text(snakeSize * 100);
+
+            // Mostrar una nueva comida en una ubicación aleatoria
+            mostrarComidaAleatoria();
         }
     }
+
 
 
     // Detectar la pulsación de una tecla para cambiar la dirección de la serpiente
