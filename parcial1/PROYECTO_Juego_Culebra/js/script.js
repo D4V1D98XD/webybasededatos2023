@@ -14,6 +14,8 @@ $(document).ready(function () {
 
     // Tamaño inicial de la serpiente
     var snakeSize = 1;
+    var partesCuerpo = [];
+
 
     // Función para iniciar el juego
     function iniciarJuego() {
@@ -51,9 +53,40 @@ $(document).ready(function () {
         nuevaComida.css("display", "block");
     }
 
+    function agregarParteCuerpo(x, y) {
+        // Crea un nuevo elemento para la parte del cuerpo
+        var nuevaParteCuerpo = $("<div class='snake snake-body'></div>");
+
+        // Establece la posición de la nueva parte del cuerpo
+        nuevaParteCuerpo.css({ left: x + "px", top: y + "px" });
+
+        // Agrega la nueva parte del cuerpo al DOM
+        $(".game-container").append(nuevaParteCuerpo);
+
+        // Muestra la nueva parte del cuerpo
+        nuevaParteCuerpo.css("display", "block");
+
+        // Agrega la nueva parte del cuerpo al arreglo
+        partesCuerpo.push(nuevaParteCuerpo);
+    }
+
+    function moverPartesCuerpo() {
+        // Mueve cada parte del cuerpo hacia la posición de la parte delante de ella
+        for (var i = partesCuerpo.length - 1; i > 0; i--) {
+            var parteActual = partesCuerpo[i];
+            var parteAnterior = partesCuerpo[i - 1];
+            var left = parteAnterior.css("left");
+            var top = parteAnterior.css("top");
+            parteActual.css({ left: left, top: top });
+        }
+    }
+
 
     // Función para mover la serpiente
     function moverSerpiente() {
+        // Mover las partes del cuerpo de la serpiente primero
+        moverPartesCuerpo();
+    
         // Mueve la serpiente en la dirección actual
         if (direccionActual === "derecha") {
             posX += 20; // Mover hacia la derecha
@@ -64,10 +97,10 @@ $(document).ready(function () {
         } else if (direccionActual === "abajo") {
             posY += 20; // Mover hacia abajo
         }
-
+    
         // Actualizar la posición de la cabeza de la serpiente en el DOM
         $(".snake").css({ left: posX + "px", top: posY + "px" });
-
+    
         // Comprobar colisión con la comida
         verificarColision();
     }
@@ -81,7 +114,8 @@ $(document).ready(function () {
             console.log("Colisión detectada");
             $(".food").remove();
             $("#Puntos").text(snakeSize * 100);
-
+            snakeSize++;
+            agregarParteCuerpo(posX - 20, posY); 
             // Mostrar una nueva comida en una ubicación aleatoria
             mostrarComidaAleatoria();
         }
@@ -105,5 +139,6 @@ $(document).ready(function () {
         } else if (event.key === "ArrowDown" && direccionActual !== "arriba") {
             direccionActual = "abajo";
         }
+        
     });
 });
