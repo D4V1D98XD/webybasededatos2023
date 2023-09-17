@@ -1,0 +1,23 @@
+.snake {
+    width: 20px;
+    height: 20px;
+    background-color: #39dd19;
+    position: absolute;
+    top: 50%;
+    margin-top: -10px;
+    left: 50%;
+    margin-left: -10px;
+    display: none;
+}
+
+.snake-head {
+    background-color: #5ce242;
+}
+
+.snake-body {
+    width: 20px;
+    height: 20px;
+    background-color: #39dd19;
+    position: absolute;
+    display: none;
+}

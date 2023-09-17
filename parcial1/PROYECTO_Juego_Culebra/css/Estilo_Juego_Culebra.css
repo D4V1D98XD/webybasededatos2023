@@ -1,41 +1,13 @@
 @import "./fonts.css";
 @import "./IU.css";
+@import "./snake.css";
 
-
-/* Añadir estilos para centrar el game-container */
 .game-container {
     width: 500px;
     height: 300px;
     border: 1px solid #000000;
     margin: 0 auto;
-    position: relative; /* Añadir posición relativa para que la serpiente sea absoluta con respecto a este */
-}
-
-.snake {
-    width: 20px;
-    height: 20px;
-    background-color: #39dd19;
-    position: absolute;
-    /* Centro la serpiente verticalmente restando la mitad de su altura al contenedor */
-    top: 50%;
-    margin-top: -10px; /* La mitad de la altura de la serpiente */
-    /* Centro la serpiente horizontalmente restando la mitad de su ancho al contenedor */
-    left: 50%;
-    margin-left: -10px; /* La mitad del ancho de la serpiente */
-    display: none;
-}
-
-.snake-head {
-    background-color: #5ce242; /* Color de fondo para la cabeza de la serpiente */
-    /* Otros estilos para la cabeza de la serpiente */
-}
-
-.snake-body {
-    width: 20px;
-    height: 20px;
-    background-color: #39dd19;
-    position: absolute;
-    display: none;
+    position: relative;
 }
 
 .food {

@@ -1,16 +1,20 @@
 $(document).ready(function () {
     var juegoIniciado = false;
-    var velocidad = 200; // Velocidad de movimiento de la serpiente en milisegundos
     var intervaloMovimiento;
-    var direccionActual = "derecha"; // Dirección inicial de la serpiente
+    var direccionActual = "derecha";
 
-    // Definir la posición inicial de la serpiente
     var posX = 250;
     var posY = 150;
 
-    // Tamaño inicial de la serpiente
     var snakeSize = 1;
     var partesCuerpo = [];
+
+    //velocidades
+    var velocidad = 200;
+    var velocidadInicial = 400;
+    var incrementoVelocidad = 10;
+    var velocidad = velocidadInicial;
+
 
     // Función para iniciar el juego
     function iniciarJuego() {
@@ -35,11 +39,28 @@ $(document).ready(function () {
         var comidaX = Math.floor(Math.random() * maxX / 20) * 20; // Posición X aleatoria en múltiplos de 20
         var comidaY = Math.floor(Math.random() * maxY / 20) * 20; // Posición Y aleatoria en múltiplos de 20
     
-        // Actualizar la posición de la comida en el DOM
         $(".food").css({ left: comidaX + "px", top: comidaY + "px" });
 
         // Mostrar la comida
         $(".food").css("display", "block");
+    }
+
+    // Función para verificar colisiones con la serpiente misma
+    function verificarColisionConSerpiente() {
+        if(snakeSize >= 2){
+            console.log("la serpiente es mayor o igual a 2");
+            for (var i = 2; i < partesCuerpo.length; i++) {
+                var parte = partesCuerpo[i];
+                if (posX === parte.x && posY === parte.y) {
+                    finDelJuego();
+                    console.log("geim over");
+                    console.log("posicion cuerpo",parte.x);
+                    console.log("posicion cabeza", posX);
+
+                    return;
+                }
+            }
+        }
     }
 
     // Función para mover la serpiente
@@ -54,14 +75,16 @@ $(document).ready(function () {
         } else if (direccionActual === "abajo") {
             posY += 20; // Mover hacia abajo
         }
+        console.log(velocidad);
 
-        // Actualizar la posición de la cabeza de la serpiente en el DOM
+        verificarColisionConSerpiente();
+
+        // Actualizar la posición de la cabeza de la serpiente
         $(".snake").css({ left: posX + "px", top: posY + "px" });
 
         // Agregar una nueva parte al cuerpo de la serpiente
         partesCuerpo.push({ x: posX, y: posY });
 
-        // Eliminar la última parte del cuerpo si la serpiente no ha crecido
         if (partesCuerpo.length > snakeSize) {
             partesCuerpo.shift();
         }
@@ -72,32 +95,55 @@ $(document).ready(function () {
         // Comprobar colisión con la comida
         verificarColision();
     }
-
     // Comprobar colisión entre la cabeza de la serpiente y la comida
+    // Comprobar colisión con los bordes del contenedor
     function verificarColision() {
         var comidaX = parseInt($(".food").css("left"));
         var comidaY = parseInt($(".food").css("top"));
-        
+
+        // Dimensiones del contenedor
+        var contenedorAncho = 500;
+        var contenedorAlto = 300;
+
+        if (posX < 0 || posX >= contenedorAncho || posY < 0 || posY >= contenedorAlto) {
+            finDelJuego(); // La serpiente ha chocado con los bordes del contenedor
+            return;
+        }
+
         if (posX == comidaX + 10 && posY == comidaY + 10) {
             // La serpiente ha tocado la comida
             snakeSize++; // Aumentar el tamaño de la serpiente
             $("#Puntos").text(snakeSize * 100); // Actualizar los puntos
 
-            // Generar una nueva posición aleatoria para la comida y mostrarla
+            // Incrementa la velocidad
+            velocidad -= incrementoVelocidad;
+            clearInterval(intervaloMovimiento); // Detener el intervalo actual
+            intervaloMovimiento = setInterval(moverSerpiente, velocidad); // Iniciar un nuevo intervalo con la velocidad actualizada
+
+            // Genera una nueva posición aleatoria para la comida y mostrarla
             mostrarComidaAleatoria();
 
-            // Agregar una nueva parte al cuerpo de la serpiente
+            // Agrega una nueva parte al cuerpo de la serpiente
             partesCuerpo.push({ x: posX, y: posY });
         }
     }
+
 
     // Función para mover las partes del cuerpo de la serpiente
     function moverPartesCuerpo() {
         for (var i = 0; i < partesCuerpo.length; i++) {
             var parte = partesCuerpo[i];
             $(".snake-body:eq(" + i + ")").css({ left: parte.x + "px", top: parte.y + "px" });
+            
         }
     }
+
+    function finDelJuego() {
+        clearInterval(intervaloMovimiento); // Detener el intervalo de movimiento
+        juegoIniciado = false; // Marcar el juego como no iniciado
+        alert("Fin del juego. Puntuación: " + (snakeSize * 100)); // Mostrar un mensaje con la puntuación
+    }
+    
 
     // Detectar la pulsación de una tecla para cambiar la dirección de la serpiente
     $(document).keydown(function (event) {
