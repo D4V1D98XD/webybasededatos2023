@@ -26,9 +26,9 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" href="inicio.php">Inicio</a></li>
-            <li><a class="dropdown-item" href="consultarAlumnos.php">Consultar Materias</a></li>
+            <li><a class="dropdown-item" href="Consultar_Materias.php">Consultar Materias</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="Registrar_Materias.php">Registar Materias</a></li>
+            <li><a class="dropdown-item" href="Registro_de_Materias.php">Registar Materias</a></li>
           </ul>
         </li>
       </ul>
