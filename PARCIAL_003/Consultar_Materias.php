@@ -12,7 +12,6 @@
     <?php 
         include 'menu.php'; 
         include 'conexion.php'; 
-        //Recuperamos los datos de la base de datos 
         $sql = "SELECT * FROM materias";
         $datos = $conexion->query($sql);
 
@@ -28,8 +27,8 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Nombre</th>
-                                <th>Especialidad</th>
                                 <th>Semestre</th>
+                                <th>Especialidad</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -37,11 +36,11 @@
                                 <tr>
                                     <td><?php echo $registro["id"]; ?></td>
                                     <td><?php echo $registro["nombre"]; ?></td>
-                                    <td><?php echo $registro["Especialidad"]; ?></td>
-                                    <td><?php echo $registro["semestre"]; ?></td>
+                                    <td><?php echo $registro["semestre"]; ?></td> 
+                                    <td><?php echo $registro["especialidad"]; ?></td>
                                     <td>
-                                        <a href="editarAlumno.php?id=<?php echo $registro["id"]; ?>"  class="btn btn-sm btn-primary">Editar</a>
-                                        <a href="eliminarAlumno.php?id=<?php echo $registro["id"]; ?>" class="btn btn-sm btn-danger">Eliminar</a>
+                                        <a href=""  class="btn btn-sm btn-primary">Editar</a>
+                                        <a href="EliminarMateria.php" class="btn btn-sm btn-danger">Eliminar</a>
                                     </td>
                                 </tr>
                             <?php } ?>
