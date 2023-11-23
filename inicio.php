@@ -11,14 +11,15 @@
 <body>
     <?php include 'menu.php'; ?>
 
+    <br>
     <div class="container card mt-4 p-4">
         <div class="row">
-            <div class="col-12 text-center">
-                <h2>Bienvenido al sistema de gestión de alumnos</h2>
+            <div class="col-12 text-center"><br>
+                <h2>Bienvenido al sistema de gestión de alumnos</h2><br>
                 <img src="imagenes/logo.png" alt="">
             </div>
         </div>
-    </div>
+    </div><br><br><br>
 
     <footer class="text-center">
         <hr>
